@@ -1,0 +1,24 @@
+﻿@model CustomerApplication.Models.Customer
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Customer</title>
+</head>
+<body>
+    <div> 
+        Customer Name:-@Model.CustomerName <br />
+        Customer Code:-@Model.CustomerCode <br />
+        @*@{ 
+            string str = TempData.Peek("test").ToString();
+        }
+        @str.ToUpper()*@
+    </div>
+</body>
+</html>

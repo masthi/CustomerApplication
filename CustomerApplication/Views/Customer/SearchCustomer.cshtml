@@ -1,0 +1,67 @@
+﻿@model CustomerApplication.ViewModel.CustomerVM
+@using CustomerApplication.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SearchCustomer</title>
+</head>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/Customer.js"></script>
+<script language="javascript">
+    //App
+    var app = angular.module("myapp", []); //creating an app
+    app.controller('CustomerViewModel', CustomerViewModel); //Registering ViewModel
+    //Controller
+</script>
+<body ng-app="myapp">
+    <div ng-controller="CustomerViewModel"> 
+            Enter CustomerName:-<input ng-model="Customer.CustomerName" name="txtCustomerName" id="Text1" type="text" /><br />
+            <input  id="Submit1" type="button" value="Search Customer" ng-click="LoadByName()" />
+
+        @Html.Partial("DisplayCustomer", Model);
+        @*<form id="frm2">
+            <i>Enter Customer Name:-</i>@Html.TextBoxFor(m=>m.customer.CustomerName)
+        </form>
+        <input id="Btn" type="button" value="Search Customer" onclick="SearchCustomer()" />*@
+    </div>
+    <br />
+    @*<table id="tbl">
+        <tr>
+            <td> Customer Code</td>
+            <td> Customer Name</td>
+        </tr>
+    </table>
+    <script language="javascript">
+        function Binddata(Customers) {
+            $("#tbl").empty();
+            var tbl = $("#tbl");
+            for (var i = 0; i < Customers.length; i++) {
+                var newRow = "<tr>" +
+                        "<td>" + Customers[i].CustomerCode + "</td>" +
+                        "<td>" + Customers[i].CustomerName + "</td>" +
+                        "</tr>";
+                tbl.append(newRow);
+            }
+        }
+        function SearchCustomer() {
+            //post call to the MVC Controller
+            //reference of the form and serialize the data
+            var frm = $("#frm2").serialize();
+            
+            $.post("SearchCustomer", frm, Binddata);
+            $("#customer_CustomerName").val("");
+        }
+    </script>*@
+
+
+</body>
+</html>

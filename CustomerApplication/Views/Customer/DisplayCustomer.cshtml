@@ -1,0 +1,34 @@
+﻿@model CustomerApplication.ViewModel.CustomerVM
+@using CustomerApplication.Models;
+@*<table>
+    <tr>
+        <td>Customer Code </td>
+        <td>Customer Name </td>
+    </tr>
+    @foreach (Customer item in Model.customers)
+            {
+        <tr>
+            <td>@item.CustomerCode</td>
+            <td>@item.CustomerName</td>
+        </tr>
+    }
+</table>*@
+@*@{ 
+    WebGrid obj = new WebGrid(Model.customers);
+}
+@obj.GetHtml();*@
+
+<table id="tbl">
+    <tr>
+        <td>Customer Code</td>
+        <td>Customer Name</td>
+        <td>Customer Amount</td>
+    </tr>
+    <tr ng-repeat="cust in Customers">
+        <td>{{cust.CustomerCode}}</td>
+        <td>{{cust.CustomerName}}</td>
+        <td style="background-color:{{cust.CustomerAmountColor}}">{{cust.CustomerAmount}}</td>
+    </tr>
+</table>
+
+

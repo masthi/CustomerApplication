@@ -1,0 +1,72 @@
+﻿@model CustomerApplication.ViewModel.CustomerVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EnterCustomer</title>
+</head>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<body>
+    <div> 
+        @*<form action="Submit" method="post">
+            Customer Name <input name="CustomerName" value="@Model.CustomerName" id="Text1" type="text" /> 
+            @Html.ValidationMessageFor(x=>x.CustomerName) <br />
+            Customer Code <input name="CustomerCode" value="@Model.CustomerCode" id="Text1" type="text" /> 
+            @Html.ValidationMessageFor(x => x.CustomerCode) <br />
+            <input id="Submit1" type="submit" value="submit" />
+        </form>*@
+
+        <form id="frm1">
+            <i>Customer Name</i> @Html.TextBoxFor(m => m.customer.CustomerName)
+            @Html.ValidationMessageFor(x => x.customer.CustomerName) <br />
+            <i> Customer Code</i> @Html.TextBoxFor(m => m.customer.CustomerCode)
+            @Html.ValidationMessageFor(x => x.customer.CustomerCode) <br />
+        </form>
+        <input id="Btn" type="button" value="Add Customer" onclick="SendData()" />
+
+        <br />
+        <div id="status"> </div>
+        <table id="tbl">
+            <tr>
+                <td>Customer Code</td>
+                <td>Customer Name</td>
+            </tr>
+        </table>
+        <script language="javascript">
+            $("#status").text("Loading...");
+            $.get("getCustomers", null, Binddata);
+            function Binddata(Customers) {
+                //for loop
+                $("#tbl").empty();
+                var tbl = $("#tbl");
+                
+                for (var i = 0; i < Customers.length; i++) {
+                    var newRow = "<tr>" +
+                        "<td>" + Customers[i].CustomerCode + "</td>" +
+                        "<td>" + Customers[i].CustomerName + "</td>" +
+                        "</tr>";
+                    tbl.append(newRow);
+                }
+                $("#status").text("");
+            }
+            function SendData() {
+                //post call to the MVC Controller
+                //reference of the form,serailize the data
+                var frm = $("#frm1").serialize();
+                $.post("Submit", frm, Binddata);
+                $("#customer_CustomerName").val("")
+                $("#customer_CustomerCode").val("");
+            }
+        </script>
+
+</div>
+</body>
+</html>
